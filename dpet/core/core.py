@@ -1,5 +1,6 @@
 import geoviews as gv
 import holoviews as hv
+from holoviews.operation.datashader import regrid
 from holoviews.streams import PointDraw
 import math
 import numpy as np
@@ -110,11 +111,10 @@ def extract_profiles(list_of_coordinate_tuples,
         
     return df
     
-def plot_base_map(bounds,
-                  dem_crs,
-                  points,
-                  max_points=5,
-                  url= 'https://mt1.google.com/vt/lyrs=s&x={X}&y={Y}&z={Z}'):
+def plot_base_map_tiles_gui(bounds,
+                      dem_crs,
+                      points,
+                      url= 'https://mt1.google.com/vt/lyrs=s&x={X}&y={Y}&z={Z}'):
     
     """
     Plots base map with Google Sattelite tiles for interactive point selection along transect.
@@ -140,7 +140,34 @@ def plot_base_map(bounds,
                                                      color='blue', 
                                                      tools=["hover"]))
     return base_map
+
+def plot_base_map_dem_gui(dem_file,
+                          points):
     
+    """
+    Plots dem for interactive point selection along transect.
+    
+    Parameters
+    ----------
+    dem_file : path to GeoTIFF file on disk.
+    
+    points : geoviews.element.geo.Points
+                  
+    Returns
+    -------
+    base_map : holoviews.core.overlay.Overlay
+    """
+
+    dem_gv = gv.Dataset(gv.load_tiff(dem_file,nan_nodata=True)).to(gv.Image, ['x', 'y']).opts(tools=['hover'])
+    dem_gv = regrid(dem_gv.opts(colorbar=True, cmap='greys'))
+
+    base_map = (dem_gv * points).opts(gv.opts.Points(width=750, 
+                                                     height=900, 
+                                                     size=5, 
+                                                     color='blue', 
+                                                     tools=["hover"]))
+    return base_map
+
 
 def sample_dem(dem_file, list_of_coordinate_tuples):
     source = rasterio.open(dem_file)
