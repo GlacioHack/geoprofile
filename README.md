@@ -1,5 +1,5 @@
 # DPET
-DEM Profile Extraction Tool
+DEM Profile Extraction Tool (DPET - working title) 
 
 Interactive tool to extract and plot profile along Digital Elevation Model (DEM) transect.
 
