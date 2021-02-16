@@ -1,0 +1,18 @@
+name: dpet
+channels:
+  - conda-forge
+dependencies:
+  - contextily
+  - geopandas
+  - geoviews
+  - holoviews
+  - hvplot
+  - matplotlib
+  - numpy
+  - panel
+  - pyepsg
+  - rasterio
+  - shapely
+  - xarray
+  - pip:
+    - "--editable=git+https://github.com/friedrichknuth/driveanon.git#egg=driveanon"

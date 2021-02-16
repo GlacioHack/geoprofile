@@ -10,3 +10,12 @@ Interactive tool to extract and plot profile along Digital Elevation Model (DEM)
 
 ### Examples
 See [notebooks](./examples/) for processing examples.
+
+### Installation
+```
+$ git clone https://github.com/friedrichknuth/dpet.git
+$ cd ./hsfm
+$ conda create -f environment.yml
+$ conda activate dpet
+$ pip install -e .
+```
