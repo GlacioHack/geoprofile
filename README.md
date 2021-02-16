@@ -1,2 +1,2 @@
-# dpet
+# DPET
 DEM Profile Extraction Tool
