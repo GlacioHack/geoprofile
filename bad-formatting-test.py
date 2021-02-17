@@ -1,10 +1,5 @@
 import os
 
-print("poorly formatted"
-)
+print("poorly formatted")
 
-print(
-
-"python code"
-
-) 
+print("python code")
