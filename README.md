@@ -1,7 +1,5 @@
-# DPET
-DEM Profile Extraction Tool
-
-Interactive tool to extract and plot profile along Digital Elevation Model (DEM) transect.
+# geoprofile
+Interactive tool to extract and plot profile along geospatial raster transect.
 
 ### Features
 - interactive gui to select points along transect
@@ -13,9 +11,9 @@ See [notebooks](./examples/) for processing examples.
 
 ### Installation
 ```
-$ git clone https://github.com/friedrichknuth/dpet.git
-$ cd ./hsfm
+$ git clone https://https://github.com/GlacioHack/geoprofile.git
+$ cd ./geoprofile
 $ conda create -f environment.yml
-$ conda activate dpet
+$ conda activate geoprofile
 $ pip install -e .
 ```
