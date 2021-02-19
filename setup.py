@@ -3,12 +3,12 @@
 from distutils.core import setup
 
 setup(
-    name="dpet",
+    name="geoprofile",
     version="0.1",
-    description="DEM Profile Extraction Tool.",
+    description="Geospatial raster profiling/",
     # author='',
     # author_email='',
     # url='',
-    packages=["dpet"],
+    packages=["geoprofile"],
     # install_requires=[''],
 )
