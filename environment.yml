@@ -1,4 +1,4 @@
-name: dpet
+name: geoprofile
 channels:
   - conda-forge
 dependencies:
