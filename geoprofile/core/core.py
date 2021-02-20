@@ -9,7 +9,7 @@ import panel as pn
 import pathlib
 import rasterio
 
-import dpet
+import geoprofile
 
 hv.extension("bokeh")
 
