@@ -104,11 +104,11 @@ def extract_profiles(list_of_coordinate_tuples, dem_file_list):
     dense_coordinates : list([tuple(x,y), tuple(x,y),...])
     """
 
-    x_coordinates, y_coordinates = dpet.core.dense_points_along_transect(
+    x_coordinates, y_coordinates = geoprofile.core.dense_points_along_transect(
         list_of_coordinate_tuples
     )
     dense_coordinates = list(zip(x_coordinates, y_coordinates))
-    distances = dpet.core.distance_along_transect(dense_coordinates)
+    distances = geoprofile.core.distance_along_transect(dense_coordinates)
 
     df = pd.DataFrame.from_dict(
         {
@@ -120,7 +120,7 @@ def extract_profiles(list_of_coordinate_tuples, dem_file_list):
 
     for dem_file in dem_file_list:
         base_name = pathlib.Path(dem_file).stem + "_elev_m"
-        elevations, no_data_value = dpet.core.sample_dem(dem_file, dense_coordinates)
+        elevations, no_data_value = geoprofile.core.sample_dem(dem_file, dense_coordinates)
         df[base_name] = elevations
         df.loc[
             df[base_name] == no_data_value, base_name
