@@ -14,11 +14,48 @@ import geoprofile
 hv.extension("bokeh")
 
 
+def calculate_hillshade(array,
+                        azimuth=315,
+                        angle_altitude=45):
+    """
+    Compute hillshaded relief from Digital Elevation Model data array.
+
+    Parameters
+    ----------
+    array : numpy.ndarray
+
+    azimuth : int
+    
+    angle_altitude : int
+
+    Returns
+    -------
+    numpy.ndarray
+    """
+    
+    azimuth = 360.0 - azimuth 
+
+    x, y = np.gradient(array)
+    slope = np.pi/2.-np.arctan(np.sqrt(x*x+y*y))
+    aspect = np.arctan2(-x,y)
+    azimuthrad = azimuth*np.pi/180.
+    altituderad = angle_altitude*np.pi/180.
+
+    shaded = np.sin(altituderad) * \
+             np.sin(slope) + \
+             np.cos(altituderad) * \
+             np.cos(slope) * \
+             np.cos((azimuthrad-np.pi/2.) - \
+             aspect)
+
+    return 255*(shaded + 1)/2
+
+
 def dense_points_along_transect(
     list_of_coordinate_tuples, num_points_between_coords=100
 ):
     """
-    Creates dense list of coordinates along transect
+    Creates dense list of coordinates along transect.
 
     Parameters
     ----------
