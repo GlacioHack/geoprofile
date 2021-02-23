@@ -30,7 +30,7 @@ def calculate_hillshade(array,
 
     Returns
     -------
-    numpy.ndarray
+    hillshade : numpy.ndarray
     """
     
     azimuth = 360.0 - azimuth 
@@ -47,8 +47,10 @@ def calculate_hillshade(array,
              np.cos(slope) * \
              np.cos((azimuthrad-np.pi/2.) - \
              aspect)
+    
+    hillshade = 255*(shaded + 1)/2
 
-    return 255*(shaded + 1)/2
+    return hillshade
 
 
 def dense_points_along_transect(
@@ -222,6 +224,28 @@ def plot_base_map_dem_gui(dem_file, points):
     )
     return base_map
 
+def replace_and_fill_nodata_value(array, nodata_value, fill_value):
+    """
+    Replace nodata values with fill value in array.
+    
+    Parameters
+    ----------
+    array : numpy.ndarray
+
+    nodata_value : value similar to array.dtype
+    
+    fill_value : value similar to array.dtype
+
+    Returns
+    -------
+    masked_array : numpy.ndarray
+    """
+    
+    mask = (array == nodata_value)
+    masked_array = np.ma.masked_array(array, mask=mask)
+    masked_array = np.ma.filled(masked_array, fill_value=fill_value)
+    
+    return masked_array
 
 def sample_dem(dem_file, list_of_coordinate_tuples):
     source = rasterio.open(dem_file)
