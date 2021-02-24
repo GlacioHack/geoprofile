@@ -8,6 +8,8 @@ import pandas as pd
 import panel as pn
 import pathlib
 import rasterio
+import rioxarray
+import xarray as xr
 
 import geoprofile
 
@@ -256,3 +258,43 @@ def sample_dem(dem_file, list_of_coordinate_tuples):
         elevations.append(val[0])
 
     return elevations, no_data_value
+
+def xr_read_GeoTIFF(GeoTIFF_file_path, masked=True):
+    """
+    Reads in single or multi-band GeoTIFF as chunked dask array for lazy io.
+    
+    Parameters
+    ----------
+    GeoTIFF_file_path : str
+
+    Returns
+    -------
+    ds : xarray.Dataset
+        Includes rioxarray extension to xarray.Dataset
+    """
+    
+    da = rioxarray.open_rasterio(GeoTIFF_file_path, chunks=1000, masked=masked)
+    
+    # Extract bands and assign as variables in xr.Dataset()
+    ds = xr.Dataset()
+    for i,v in enumerate(da.band):
+        da_tmp = da.sel(band=v)
+        da_tmp.name = 'band'+str(i+1)
+        
+        ds[da_tmp.name] = da_tmp
+        
+    # Delete empty band coordinates.
+    # Need to preserve spatial_ref coordinate, even though it appears empty.
+    # See spatial_ref attributes under ds.coords.variables used by rioxarray extension.
+    del ds.coords['band']
+    
+    # Preserve top-level attributes and extract single value from value iterables e.g. (1,) --> 1
+    ds.attrs = da.attrs
+    for key, value in ds.attrs.items():
+        try:
+            if len(value) == 1:
+                ds.attrs[key] = value[0]
+        except TypeError:
+            pass
+        
+    return ds
