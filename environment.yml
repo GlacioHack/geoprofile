@@ -2,6 +2,7 @@ name: geoprofile
 channels:
   - conda-forge
 dependencies:
+  - black
   - contextily
   - geopandas
   - geoviews
@@ -12,8 +13,12 @@ dependencies:
   - panel
   - pyepsg
   - rasterio
+  - richdem
   - shapely
   - xarray
   - pip
   - pip:
     - "git+https://github.com/friedrichknuth/driveanon.git#egg=driveanon"
+    - "git+https://github.com/GlacioHack/GeoUtils.git#egg=GeoUtils"
+    - "git+https://github.com/GlacioHack/DemUtils.git#egg=DemUtils"
+    
