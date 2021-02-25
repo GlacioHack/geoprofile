@@ -69,7 +69,7 @@ def dem_time_series_stack(
     save_to_nc=False,
     nc_out_dir=None,
 ):
-    
+
     # TODO fill out the doc string.
     """
     Resample DEMs in memory to common bounds and resolution, then stack as time
@@ -83,7 +83,7 @@ def dem_time_series_stack(
     -------
     ds : xr.Dataset()
     """
-    
+
     if isinstance(resampling, type(Resampling.nearest)):
         resampling = resampling
     elif resampling == "nearest":
