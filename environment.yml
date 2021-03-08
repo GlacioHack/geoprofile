@@ -14,11 +14,12 @@ dependencies:
   - pyepsg
   - rasterio
   - richdem
+  - rioxarray
   - shapely
   - xarray
   - pip
   - pip:
     - "git+https://github.com/friedrichknuth/driveanon.git#egg=driveanon"
     - "git+https://github.com/GlacioHack/GeoUtils.git#egg=GeoUtils"
-    - "git+https://github.com/GlacioHack/DemUtils.git#egg=DemUtils"
+    - "git+https://github.com/GlacioHack/xdem.git#egg=xdem"
     
