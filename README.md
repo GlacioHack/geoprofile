@@ -17,3 +17,9 @@ $ conda env create -f environment_ubuntu_18.04_date_2021-03-07.yml
 $ conda activate geoprofile
 $ pip install -e .
 ```
+To make this kernel selectable  
+
+```
+$ conda activate geoprofile
+$ python -m ipykernel install --user --name geoprofile
+```
