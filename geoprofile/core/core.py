@@ -386,7 +386,7 @@ def gv_plot_dem_ds(
     elevation_img = (
         gv.Dataset(ds[elevation_name], crs=crs)
         .to(gv.Image, ["x", "y"])
-        .opts(tools=["hover"],aspect='equal',frame_height=frame_height)
+        .opts(tools=["hover"], aspect="equal", frame_height=frame_height)
     )
     elevation = regrid(elevation_img.opts(colorbar=True, cmap=elevation_cmap))
 
