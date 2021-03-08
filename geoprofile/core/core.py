@@ -374,9 +374,9 @@ def gv_plot_dem_ds(
     hillshade_cmap="greys",
     hillshade_alpha=0.5,
     basemap=True,
-    plot_size=200,
+    frame_height=500,
 ):
-    # gv.output(size=plot_size)
+
     gv.Dimension.type_formatters[np.datetime64] = "%Y-%m-%d"
 
     crs = cartopy.crs.epsg(ds.rio.crs.to_epsg())
@@ -385,8 +385,8 @@ def gv_plot_dem_ds(
 
     elevation_img = (
         gv.Dataset(ds[elevation_name], crs=crs)
-        .to(gv.Image, ["x", "y"], dynamic=True)
-        .opts(tools=["hover"],aspect='equal',frame_height=1000)
+        .to(gv.Image, ["x", "y"])
+        .opts(tools=["hover"],aspect='equal',frame_height=frame_height)
     )
     elevation = regrid(elevation_img.opts(colorbar=True, cmap=elevation_cmap))
 
@@ -395,7 +395,7 @@ def gv_plot_dem_ds(
     if isinstance(hillshade_name, type("")):
         hillshade_img = (
             gv.Dataset(ds[hillshade_name], crs=crs)
-            .to(gv.Image, ["x", "y"], dynamic=True)
+            .to(gv.Image, ["x", "y"])
             .opts(alpha=hillshade_alpha)
         )
         hillshade = regrid(hillshade_img.opts(colorbar=True, cmap=hillshade_cmap))

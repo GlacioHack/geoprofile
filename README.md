@@ -13,7 +13,7 @@ See [notebooks](./examples/) for processing examples.
 ```
 $ git clone https://https://github.com/GlacioHack/geoprofile.git
 $ cd ./geoprofile
-$ conda env create -f environment.yml
+$ conda env create -f environment_ubuntu_18.04_date_2021-03-07.yml
 $ conda activate geoprofile
 $ pip install -e .
 ```
